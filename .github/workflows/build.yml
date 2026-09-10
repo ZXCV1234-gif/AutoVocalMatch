@@ -3,8 +3,8 @@ name: 编译 VST3
 on:
   workflow_dispatch:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
 
 jobs:
   windows:
