@@ -1,0 +1,29 @@
+name: 编译 VST3
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: 配置
+        run: cmake -B build -A x64
+
+      - name: 编译
+        run: cmake --build build --config Release --parallel
+
+      - name: 上传插件
+        uses: actions/upload-artifact@v4
+        with:
+          name: AutoVocalMatch-Windows
+          path: |
+            build/*/*_artefacts/Release/VST3/AutoVocalMatch.vst3
+            build/*_artefacts/Release/VST3/AutoVocalMatch.vst3
