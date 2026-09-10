@@ -13,7 +13,7 @@ jobs:
       - name: 拉代码
         uses: actions/checkout@v4
         with:
-          submodules: false   # 先不自动拉
+          submodules: false
 
       - name: 初始化并更新子模块
         run: |
