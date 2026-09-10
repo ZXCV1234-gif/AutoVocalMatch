@@ -12,13 +12,12 @@ jobs:
     steps:
       - name: 拉代码
         uses: actions/checkout@v4
-        with:
-          submodules: false
 
-      - name: 初始化并更新子模块
+      - name: 初始化子模块
         run: |
           git submodule init
-          git submodule update --recursive --remote
+          git submodule update --init --recursive
+          git submodule update --remote --recursive
 
       - name: 配置
         run: cmake -B build -A x64
