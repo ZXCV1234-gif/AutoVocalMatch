@@ -10,11 +10,15 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: 拉代码（含子模块）
+      - name: 拉代码
         uses: actions/checkout@v4
         with:
-          submodules: recursive
-          fetch-depth: 0
+          submodules: false   # 先不自动拉
+
+      - name: 初始化并更新子模块
+        run: |
+          git submodule init
+          git submodule update --recursive --remote
 
       - name: 配置
         run: cmake -B build -A x64
